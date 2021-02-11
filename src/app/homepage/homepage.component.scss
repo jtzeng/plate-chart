@@ -60,12 +60,13 @@ th, td {
 
 .platesFormGroupContainer {
   column-count: 9;
+  padding-top: 1rem;
 }
 
 .miscFormGroupContainer {
-  column-count: 4;
+  column-count: 5;
 }
 
-input {
+input, select {
   width: 100px;
 }

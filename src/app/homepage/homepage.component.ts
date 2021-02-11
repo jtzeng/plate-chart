@@ -8,53 +8,111 @@ import * as _ from 'lodash';
 })
 export class HomepageComponent implements OnInit {
 
-  barWeight = 45;
-  maxWeight = 225;
-  increment = 5;
+  units: any;
+
+  barWeightLB = 45;
+  barWeightKG = 20;
+  barWeight = this.barWeightLB;
+
+  maxWeightLB = 225;
+  maxWeightKG = 100;
+  maxWeight = this.maxWeightLB;
+
+  incrementLB = 5;
+  incrementKG = 1;
+  increment = this.incrementLB;
+
   numColumns = 4;
 
   weights: any;
 
-  plateColors: any = {
+  plateColors: any;
+
+  plateColorsLB: any = {
     1.25: {
-        fg: '#000000',
-        bg: '#ffffff'
+      fg: '#000000',
+      bg: '#ffffff'
     },
     2.5: {
-        fg: '#ffffff',
-        bg: '#009900'
+      fg: '#ffffff',
+      bg: '#009900'
     },
     5: {
-        fg: '#ffffff',
-        bg: '#003399'
+      fg: '#ffffff',
+      bg: '#003399'
     },
     10: {
-        fg: '#000000',
-        bg: '#ffffff'
+      fg: '#000000',
+      bg: '#ffffff'
     },
     15: {
-        fg: '#ffffff',
-        bg: '#000000'
+      fg: '#ffffff',
+      bg: '#000000'
     },
     25: {
-        fg: '#ffffff',
-        bg: '#009900'
+      fg: '#ffffff',
+      bg: '#009900'
     },
     35: {
-        fg: '#ffffff',
-        bg: '#ffcc00'
+      fg: '#ffffff',
+      bg: '#ffcc00'
     },
     45: {
-        fg: '#ffffff',
-        bg: '#003399'
+      fg: '#ffffff',
+      bg: '#003399'
     },
     55: {
-        fg: '#ffffff',
-        bg: '#993333'
+      fg: '#ffffff',
+      bg: '#993333'
     },
   };
 
-  plates: any = {
+  plateColorsKG: any = {
+    0.5: {
+      fg: '#000000',
+      bg: '#ffffff'
+    },
+    1: {
+      fg: '#ffffff',
+      bg: '#009900'
+    },
+    1.5: {
+      fg: '#ffffff',
+      bg: '#ffcc00'
+    },
+    2: {
+      fg: '#ffffff',
+      bg: '#003399'
+    },
+    2.5: {
+      fg: '#ffffff',
+      bg: '#993333'
+    },
+    5: {
+      fg: '#000000',
+      bg: '#ffffff'
+    },
+    10: {
+      fg: '#ffffff',
+      bg: '#009900'
+    },
+    15: {
+      fg: '#ffffff',
+      bg: '#ffcc00'
+    },
+    20: {
+      fg: '#ffffff',
+      bg: '#003399'
+    },
+    25: {
+      fg: '#ffffff',
+      bg: '#993333'
+    },
+  };
+
+  plates: any;
+
+  platesLB: any = {
     1.25: 1,
     2.5: 1,
     5: 1,
@@ -63,11 +121,27 @@ export class HomepageComponent implements OnInit {
     45: 10
   };
 
+  platesKG: any = {
+    0.5: 1,
+    1: 1,
+    1.5: 1,
+    2: 1,
+    2.5: 1,
+    5: 1,
+    10: 1,
+    15: 0,
+    20: 10,
+    25: 0,
+  };
+
   combinations: any;
 
   Object = Object;
 
-  constructor() { }
+  constructor() {
+    this.units = 'lb';
+    this.applyLBConfig();
+  }
 
   ngOnInit(): void {
     this.updatePlateCombinations();
@@ -124,6 +198,31 @@ export class HomepageComponent implements OnInit {
     return biggest;
   }
 
+  applyLBConfig() {
+    this.plateColors = this.plateColorsLB;
+    this.plates = this.platesLB;
+    this.barWeight = this.barWeightLB;
+    this.maxWeight = this.maxWeightLB;
+    this.increment = this.incrementLB;
+  }
+
+  applyKGConfig() {
+    this.plateColors = this.plateColorsKG;
+    this.plates = this.platesKG;
+    this.barWeight = this.barWeightKG;
+    this.maxWeight = this.maxWeightKG;
+    this.increment = this.incrementKG;
+  }
+
+  dataChangedUnits() {
+    if (this.units === 'lb') {
+      this.applyLBConfig();
+    } else if (this.units === 'kg') {
+      this.applyKGConfig();
+    }
+    this.updatePlateCombinations();
+  }
+
   dataChangedPlates(weight: any, event: any) {
     this.plates[weight] = event.target.valueAsNumber;
     this.updatePlateCombinations();
@@ -131,16 +230,31 @@ export class HomepageComponent implements OnInit {
 
   dataChangedBarWeight(event: any) {
     this.barWeight = event.target.valueAsNumber;
+    if (this.units === 'lb') {
+      this.barWeightLB = this.barWeight;
+    } else if (this.units === 'kg') {
+      this.barWeightKG = this.barWeight;
+    }
     this.updatePlateCombinations();
   }
 
   dataChangedMaxWeight(event: any) {
     this.maxWeight = event.target.valueAsNumber;
+    if (this.units === 'lb') {
+      this.maxWeightLB = this.maxWeight;
+    } else if (this.units === 'kg') {
+      this.maxWeightKG = this.maxWeight;
+    }
     this.updatePlateCombinations();
   }
 
   dataChangedIncrement(event: any) {
     this.increment = event.target.valueAsNumber;
+    if (this.units === 'lb') {
+      this.incrementLB = this.increment;
+    } else if (this.units === 'kg') {
+      this.incrementKG = this.increment;
+    }
     this.updatePlateCombinations();
   }
 

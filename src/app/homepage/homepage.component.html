@@ -25,21 +25,15 @@
 
 <div class="container formContainer">
   <form>
-    <div class="platesFormGroupContainer">
-      <div class="form-group" *ngFor="let plate of getSortedKeys(plateColors)">
-        <label for="plateInput">
-          <span class="numberCircle"
-          [ngStyle]="{'color': plateColors[plate].fg, 'background-color': plateColors[plate].bg}">
-            <span class="numberText">
-              {{plate}}
-            </span>
-          </span>
-        </label>
-        <input type="number" class="form-control" id="plateInput"
-        (change)="dataChangedPlates(plate, $event)" [value]="plates[plate] || 0">
-      </div>
-    </div>
     <div class="miscFormGroupContainer">
+      <div class="form-group">
+        <label for="unitsInput">Units</label>
+        <select class="form-control" id="unitsInput" [(ngModel)]="units" name="units"
+        (ngModelChange)="dataChangedUnits()">
+          <option value="lb">LB</option>
+          <option value="kg">KG</option>
+        </select>
+      </div>
       <div class="form-group">
         <label for="barWeightInput">Bar Weight</label>
         <input type="number" class="form-control" id="barWeightInput"
@@ -59,6 +53,20 @@
         <label for="numColumnsInput"># of Columns</label>
         <input type="number" class="form-control" id="numColumnsInput"
         [(ngModel)]="numColumns" name="numColumns" [value]="numColumns">
+      </div>
+    </div>
+    <div class="platesFormGroupContainer" [ngStyle]="{'column-count': Object.keys(plateColors).length}">
+      <div class="form-group" *ngFor="let plate of getSortedKeys(plateColors)">
+        <label for="plateInput">
+          <span class="numberCircle"
+          [ngStyle]="{'color': plateColors[plate].fg, 'background-color': plateColors[plate].bg}">
+            <span class="numberText">
+              {{plate}}
+            </span>
+          </span>
+        </label>
+        <input type="number" class="form-control" id="plateInput"
+        (change)="dataChangedPlates(plate, $event)" [value]="plates[plate] || 0">
       </div>
     </div>
   </form>
