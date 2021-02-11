@@ -1,0 +1,42 @@
+.header-icon {
+  width: 32px;
+  height: auto;
+  margin-right: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+main {
+  padding-top: 5rem;
+}
+
+// https://stackoverflow.com/questions/38900332/css-circles-with-a-number/38900545
+.numberCircle {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: 2.5px 2.5px 2.5px 2.5px;
+  border: 1px solid #878787;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 1.0rem;
+}
+
+.numberText {
+  position: relative;
+  top: -1px;
+}
+
+.container {
+  column-count: 3;
+  max-width: none;
+}
+
+tr, th, td {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  vertical-align: middle;
+}

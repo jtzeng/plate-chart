@@ -127,5 +127,10 @@
       }
     }
   },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "defaultProject": "plate-chart"
 }
