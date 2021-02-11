@@ -19,7 +19,47 @@
   </div>
 </nav>
 
-<main class="container">
+<div class="container titleContainer">
+  <h1>Barbell Plate Loading Chart</h1>
+</div>
+
+<div class="container formContainer">
+  <form>
+    <div class="platesFormGroupContainer">
+      <div class="form-group" *ngFor="let plate of getSortedKeys(plateColors)">
+        <label for="plateInput">
+          <span class="numberCircle"
+          [ngStyle]="{'color': plateColors[plate].fg, 'background-color': plateColors[plate].bg}">
+            <span class="numberText">
+              {{plate}}
+            </span>
+          </span>
+        </label>
+        <input type="number" class="form-control" id="plateInput"
+        (change)="dataChangedPlates(plate, $event)" [value]="plates[plate] || 0">
+      </div>
+    </div>
+    <div class="miscFormGroupContainer">
+      <div class="form-group">
+        <label for="barWeightInput">Bar Weight</label>
+        <input type="number" class="form-control" id="barWeightInput"
+        (change)="dataChangedBarWeight($event)" [value]="barWeight">
+      </div>
+      <div class="form-group">
+        <label for="maxWeightInput">Max Weight</label>
+        <input type="number" class="form-control" id="maxWeightInput"
+        (change)="dataChangedMaxWeight($event)" [value]="maxWeight">
+      </div>
+      <div class="form-group">
+        <label for="incrementInput">Increment</label>
+        <input type="number" class="form-control" id="incrementInput"
+        (change)="dataChangedIncrement($event)" [value]="increment">
+      </div>
+    </div>
+  </form>
+</div>
+
+<main class="container tableContainer">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -28,7 +68,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let weight of Object.keys(combinations)">
+      <tr *ngFor="let weight of getSortedKeys(combinations)">
         <th scope="row">{{weight}}</th>
         <td>
           <span *ngFor="let plate of combinations[weight]" class="numberCircle"

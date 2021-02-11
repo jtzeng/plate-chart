@@ -9,12 +9,10 @@ import * as _ from 'lodash';
 export class HomepageComponent implements OnInit {
 
   barWeight = 45;
-
   maxWeight = 225;
-
   increment = 5;
 
-  weights = _.range(this.barWeight, this.maxWeight + this.increment, this.increment);
+  weights: any;
 
   plateColors: any = {
     1.25: {
@@ -27,7 +25,7 @@ export class HomepageComponent implements OnInit {
     },
     5: {
         fg: '#ffffff',
-        bg: '#003366'
+        bg: '#003399'
     },
     10: {
         fg: '#000000',
@@ -47,13 +45,13 @@ export class HomepageComponent implements OnInit {
     },
     45: {
         fg: '#ffffff',
-        bg: '#003366'
+        bg: '#003399'
     },
     55: {
         fg: '#ffffff',
         bg: '#993333'
     },
-};
+  };
 
   plates: any = {
     1.25: 1,
@@ -61,21 +59,25 @@ export class HomepageComponent implements OnInit {
     5: 1,
     10: 2,
     25: 1,
-    45: 100
+    45: 10
   };
 
   combinations: any;
-
-  public keepOriginalOrder = (a: any, b: any) => a.key;
 
   Object = Object;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.updatePlateCombinations();
+  }
+
+  updatePlateCombinations() {
     this.combinations = {};
-    this.weights.forEach(weight => {
-      let remainingPlates = this.getPlatesArray();
+    this.weights = _.range(this.barWeight, this.maxWeight + this.increment, this.increment);
+
+    this.weights.forEach((weight: any) => {
+      let remainingPlates = this.getInitialPlates();
       let remainingWeight = weight;
       let combo = [];
       while (remainingWeight > this.barWeight) {
@@ -90,18 +92,21 @@ export class HomepageComponent implements OnInit {
       }
 
       this.combinations[weight] = combo;
-      console.log(weight, combo);
+      // console.log(weight, combo);
     });
-    console.log(this.combinations);
   }
 
-  getPlatesArray(): number[] {
+  getSortedKeys(obj: any) {
+    return Object.keys(obj).map(parseFloat).sort((a, b) => a - b);
+  }
+
+  getInitialPlates(): number[] {
     let res: number[] = [];
     _.forIn(this.plates, (qty: number, weight: any) => {
       weight = parseFloat(weight);
       res.push(...new Array(qty).fill(weight));
     });
-    res.sort();
+    res.sort((a, b) => a - b);
     return res;
   }
 
@@ -116,6 +121,26 @@ export class HomepageComponent implements OnInit {
       return -1;
     }
     return biggest;
+  }
+
+  dataChangedPlates(weight: any, event: any) {
+    this.plates[weight] = event.target.valueAsNumber;
+    this.updatePlateCombinations();
+  }
+
+  dataChangedBarWeight(event: any) {
+    this.barWeight = event.target.valueAsNumber;
+    this.updatePlateCombinations();
+  }
+
+  dataChangedMaxWeight(event: any) {
+    this.maxWeight = event.target.valueAsNumber;
+    this.updatePlateCombinations();
+  }
+
+  dataChangedIncrement(event: any) {
+    this.increment = event.target.valueAsNumber;
+    this.updatePlateCombinations();
   }
 
 }

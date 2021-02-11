@@ -6,8 +6,22 @@
   padding-right: 0;
 }
 
-main {
+.container {
+  max-width: none;
+}
+
+.titleContainer {
   padding-top: 5rem;
+}
+
+.formContainer {
+  padding-top: 1rem;
+}
+
+.tableContainer {
+  padding-top: 2rem;
+  column-count: 4;
+  max-width: none;
 }
 
 // https://stackoverflow.com/questions/38900332/css-circles-with-a-number/38900545
@@ -29,14 +43,21 @@ main {
   top: -1px;
 }
 
-.container {
-  column-count: 3;
-  max-width: none;
-}
-
 tr, th, td {
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   break-inside: avoid;
   vertical-align: middle;
+}
+
+.platesFormGroupContainer {
+  column-count: 9;
+}
+
+.miscFormGroupContainer {
+  column-count: 3;
+}
+
+input {
+  width: 100px;
 }
