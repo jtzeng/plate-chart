@@ -11,6 +11,7 @@ export class HomepageComponent implements OnInit {
   barWeight = 45;
   maxWeight = 225;
   increment = 5;
+  numColumns = 4;
 
   weights: any;
 

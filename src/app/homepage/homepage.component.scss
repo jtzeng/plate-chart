@@ -50,12 +50,20 @@ tr, th, td {
   vertical-align: middle;
 }
 
+th, td {
+  padding-left: 0.75rem;
+  padding-right: 0rem;
+
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .platesFormGroupContainer {
   column-count: 9;
 }
 
 .miscFormGroupContainer {
-  column-count: 3;
+  column-count: 4;
 }
 
 input {

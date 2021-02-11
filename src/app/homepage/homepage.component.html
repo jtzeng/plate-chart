@@ -55,15 +55,20 @@
         <input type="number" class="form-control" id="incrementInput"
         (change)="dataChangedIncrement($event)" [value]="increment">
       </div>
+      <div class="form-group">
+        <label for="numColumnsInput"># of Columns</label>
+        <input type="number" class="form-control" id="numColumnsInput"
+        [(ngModel)]="numColumns" name="numColumns" [value]="numColumns">
+      </div>
     </div>
   </form>
 </div>
 
-<main class="container tableContainer">
+<main class="container tableContainer" [ngStyle]="{'column-count': numColumns}">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Weight</th>
+        <th scope="col">#</th>
         <th scope="col">Plates</th>
       </tr>
     </thead>
