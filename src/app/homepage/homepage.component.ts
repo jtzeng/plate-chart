@@ -8,6 +8,8 @@ import * as _ from 'lodash';
 })
 export class HomepageComponent implements OnInit {
 
+  formVisible = true;
+
   units: any;
 
   barWeightLB = 45;
@@ -256,6 +258,10 @@ export class HomepageComponent implements OnInit {
       this.incrementKG = this.increment;
     }
     this.updatePlateCombinations();
+  }
+
+  toggleForm() {
+    this.formVisible = !this.formVisible;
   }
 
 }

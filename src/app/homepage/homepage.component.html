@@ -20,10 +20,14 @@
 </nav>
 
 <div class="container titleContainer">
-  <h1>Barbell Plate Loading Chart</h1>
+  <h1>
+    Barbell Plate Loading Chart
+  </h1>
+  <span class="toggleFormText" *ngIf="formVisible" (click)="toggleForm()">[-]</span>
+  <span class="toggleFormText" *ngIf="!formVisible" (click)="toggleForm()">[+]</span>
 </div>
 
-<div class="container formContainer">
+<div class="container formContainer" [hidden]="!formVisible">
   <form>
     <div class="miscFormGroupContainer">
       <div class="form-group">
